@@ -1,4 +1,4 @@
-#The goal here is to compare two variables : Year and age with bar plots
+#The goal here is to compare two variables : Year (annee) and age with bar plots
 
 #Load libraries
 
@@ -15,7 +15,7 @@ library(plotly)
 ```
 gbar <- hal_data %>% 
   group_by (year) %>% 
-  summarise(mmoyenne_annee = mean(age, na.rm = TRUE)) %>% #(na.rm Pas compter les NAs)
+  summarise(moyenne_annee = mean(age, na.rm = TRUE)) %>% #(na.rm Pas compter les NAs)
   ggplot( aes(x=annee, y=moyenne_age)) +
   geom_bar(stat="identity")
 ```
