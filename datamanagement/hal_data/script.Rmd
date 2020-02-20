@@ -1,0 +1,105 @@
+# I. Chargement des librairies et base de donnée.
+
+```{r Charger librairies, echo=TRUE, message=FALSE}
+library (tidyverse)
+library (ggplot2)
+library(plotly)
+
+hal_data <- read.csv2("C:/Users/dev_info_med/Desktop/stages_janvier_fevrier_2020/hal_data.csv")
+
+```
+# II. Variable quantitative (delta moyenne desfluranee 2018-2010 ici)  en fonction d'une modalité (unités ici)
+
+### Gestion de la dataframe
+
+```{r DF management, include=FALSE}
+
+# Création des variables desflurane et sevoflurane.
+
+## A. Enlever NAs, remplacer par la valeur zéro.
+
+hal_data <- hal_data %>% 
+  replace_na(list(nb_dese_anesth=0,
+                  moy_dese_anesth=0,
+                  nb_seve_anesth=0,
+                  moy_seve_anesth=0))
+
+### B. Créer variable desflurane, = 0 ou = 1.
+
+hal_data<-hal_data %>%
+  mutate(desflurane = ifelse(nb_dese_anesth >= 10 & moy_dese_anesth >= 3.5, 1, 0))
+
+
+### C. Créer variable sevoflurane, = 0 ou = 1.
+
+hal_data<-hal_data %>%
+  mutate(sevoflurane = ifelse(nb_seve_anesth >= 10 & moy_seve_anesth >= 0.8, 1, 0))
+
+#### D. Création dataframe moyenne desflurane/sevoflurane/annee
+
+moyenne_desf_sev_par_annee <- hal_data %>% 
+  select(annee , desflurane, sevoflurane) %>% 
+  group_by(annee) %>%
+  summarize(moyenne_desf = mean(desflurane , na.rm = TRUE) ,
+            moyenne_sevo = mean(sevoflurane , na.rm = TRUE))
+
+# Création de la dataframe finale :  difference moyenne de desflurane par unité (2018-2010).
+
+## A. Création dataframe moyenne desflurane par unité en 2010.
+
+moyenne_desf_par_unit_10 <- aggregate(x=hal_data$desflurane,
+                                        by=list(unit = hal_data$unit , annee = hal_data$annee),
+                                        FUN=mean) %>%
+  filter(annee == "2010") %>% 
+  rename (moyenne_desflurane = x)
+
+## B. Création dataframe moyenne desflurane par unité en 2018.
+
+moyenne_desf_par_unit_18 <- aggregate(x=hal_data$desflurane,
+                                     by=list(unit = hal_data$unit , annee = hal_data$annee),
+                                     FUN=mean) %>%
+  filter(annee == "2018") %>% 
+  rename (moyenne_desflurane = x)
+
+### C. Jointure des deux dataframes (2018 et 2010) et création d'une colonne difference entre les moyennes par unité.
+
+diff1810_moyenne_desf_par_unit <- moyenne_desf_par_unit_10 %>%
+  full_join (moyenne_desf_par_unit_18 , by = "unit" , suffix = c("10" , "18")) %>%
+  mutate(difference = moyenne_desflurane18 - moyenne_desflurane10)
+```
+
+# III. Comparaison de deux variables quantitatives (moyenne desflurane vs moyenne sevoflurane) en fonction d'une modalité (années)
+
+### Gestion de la dataframe
+
+```{r DF management2, include=FALSE}
+
+# Création des variables desflurane et sevoflurane.
+
+## A. Enlever NAs, remplacer par la valeur zéro.
+
+hal_data <- hal_data %>% 
+  replace_na(list(nb_dese_anesth=0,
+                  moy_dese_anesth=0,
+                  nb_seve_anesth=0,
+                  moy_seve_anesth=0))
+
+### B. Créer variable desflurane, = 0 ou = 1.
+
+hal_data<-hal_data %>%
+  mutate(desflurane = ifelse(nb_dese_anesth >= 10 & moy_dese_anesth >= 3.5, 1, 0))
+
+
+### C. Créer variable sevoflurane, = 0 ou = 1.
+
+hal_data<-hal_data %>%
+  mutate(sevoflurane = ifelse(nb_seve_anesth >= 10 & moy_seve_anesth >= 0.8, 1, 0))
+
+#### D. Création dataframe moyenne desflurane/sevoflurane/annee
+
+moyenne_desf_sev_par_annee <- hal_data %>% 
+  select(annee , desflurane, sevoflurane) %>% 
+  group_by(annee) %>%
+  summarize(moyenne_desf = mean(desflurane , na.rm = TRUE) ,
+            moyenne_sevo = mean(sevoflurane , na.rm = TRUE))
+```
