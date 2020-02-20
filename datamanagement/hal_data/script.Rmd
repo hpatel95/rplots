@@ -103,3 +103,44 @@ moyenne_desf_sev_par_annee <- hal_data %>%
   summarize(moyenne_desf = mean(desflurane , na.rm = TRUE) ,
             moyenne_sevo = mean(sevoflurane , na.rm = TRUE))
 ```
+
+# IV. Comparaison de trois variables quantitatives (moyenne desflurane vs moyenne sevoflurane vs moyenne non halogéné) en fonction d'une modalité (unité)
+
+
+
+### Gestion de la dataframe
+
+```{r DF managementSank, include=FALSE}
+
+## A. Enlever NAs, remplacer par la valeur zéro.
+
+hal_data <- hal_data %>% 
+  replace_na(list(nb_dese_anesth=0,
+                  moy_dese_anesth=0,
+                  nb_seve_anesth=0,
+                  moy_seve_anesth=0))
+
+### B. Créer variable desflurane, = 0 ou = 1.
+
+hal_data<-hal_data %>%
+  mutate(desflurane = ifelse(nb_dese_anesth >= 10 & moy_dese_anesth >= 3.5, 1, 0))
+
+
+### C. Créer variable sevoflurane, = 0 ou = 1.
+
+hal_data<-hal_data %>%
+  mutate(sevoflurane = ifelse(nb_seve_anesth >= 10 & moy_seve_anesth >= 0.8, 1, 0))
+
+
+### D. Créer variable zero_hal, = 0 ou = 1.
+hal_data<-hal_data %>%
+  mutate(zero_hal = ifelse(desflurane == 0 & sevoflurane == 0, 1, 0))
+
+#### E. Création dataframe moyenne desflurane/sevoflurane/unit
+moyenne_gaz_par_unit <- hal_data %>% 
+  dplyr::group_by(unit) %>%
+  dplyr::summarise(Desflurane = mean(desflurane , na.rm = TRUE),
+                   Sevoflurane = mean(sevoflurane , na.rm = TRUE),
+                   Non_Halogene = mean(zero_hal , na.rm = TRUE))
+
+```
