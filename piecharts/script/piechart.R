@@ -1,6 +1,4 @@
-#Get a basic pie chart : two group of one variable (Male vs Female), (here for one specific other variable : Unit C).
-
-
+#Creation of a basic pie chart : two group (Male vs Female) of one variable (sex), (here for one specific other variable : Unit).
 
 #Load librairies
 library (ggplot2)
