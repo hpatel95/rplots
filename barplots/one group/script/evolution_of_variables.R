@@ -1,4 +1,4 @@
-#The goal here is to compare two variables : Year (annee) and age with bar plots
+#The goal here is to compare one variable, age, throughout time (annee) with bar plots
 
 #Load libraries
 
