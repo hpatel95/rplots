@@ -1,3 +1,6 @@
+#Sakey diagram, useful for visualizing various flows (people, processes, energy...)
+
+
 #Load librairies
 library (tidyverse)
 library(networkD3)
