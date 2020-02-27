@@ -10,13 +10,15 @@ library(extrafont)
 extrafont::font_import (path="C:/Users/dev_info_med/Downloads", pattern = "awesome", prompt = FALSE)
 loadfonts(device = "win")
 
-#DF looks like this:
+#########
+DF looks like this:
 
 #pourcentage pour chaque gaz pour l'année 2018 (avec résultats zero_hal181)
 repartitiongaz18 <- c("Non Halogéné"=61,  "Sevoflurane"=27, "Desflurane"=12)
 
 # pourcentage pour chaque gaz pour l'année 2018 (avec résultats zero_hal181)
 repartitiongaz10 <- c("Non Halogéné"=65,  "Sevoflurane"=28, "Desflurane"=7)
+#########
 
 #Create two waffles plot
 
@@ -35,6 +37,7 @@ wplot10 <-  waffle(repartitiongaz10, rows = 5,  use_glyph = "square", glyph_size
          title = "Répartition des gazs utilisés en anesthésie en 2010",
          xlab="1 carré = 1 %")
   
-##Comaparison 2010 vs 2018
+
+##Comparison 2010 vs 2018
 iron(wplot10 , wplot18)
 ```
