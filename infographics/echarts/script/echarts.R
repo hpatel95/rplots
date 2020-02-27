@@ -49,6 +49,4 @@ infogr<- nbr_desf_par_unit_18 %>%
   e_y_axis(splitLine=list(show = FALSE), name = "Unité" , nameLocation = 'end') %>%
   # Format Label
   e_labels(fontSize = 16, fontWeight ='bold', position = "right", offset=c(10, 0)) 
-
-infogr
 ```
