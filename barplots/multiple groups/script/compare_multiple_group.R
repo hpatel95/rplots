@@ -1,3 +1,4 @@
+#The goal here is to compare the evolution of multiple group (linked to one variable) by a time variable (annee) or gas variable (desflurane)
 
 #Load librairies
 library (tidyverse)
