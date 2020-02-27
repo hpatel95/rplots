@@ -1,4 +1,4 @@
-#The aim here is to observe the distribution of one variable : age for each of the other variable : unit.
+#The goal  is to observe the distribution of one variable : age for each of the other variable : unit.
 #The violin plot, is a similar statistical tool as the boxplot, but it also offer density information (kde = kernel denisty estimation) for a better visulaisation of your data.
 
 ```
