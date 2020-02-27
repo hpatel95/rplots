@@ -1,4 +1,4 @@
-# I. Chargement des librairies et base de donnée.
+# I. Chargement des librairies et de la base de données.
 
 ```{r Charger librairies, echo=TRUE, message=FALSE}
 library (tidyverse)
@@ -6,7 +6,6 @@ library (ggplot2)
 library(plotly)
 
 hal_data <- read.csv2("C:/Users/dev_info_med/Desktop/stages_janvier_fevrier_2020/hal_data.csv")
-
 ```
 # II. Variable quantitative (delta moyenne desfluranee 2018-2010 ici)  en fonction d'une modalité (unités ici)
 
@@ -106,8 +105,6 @@ moyenne_desf_sev_par_annee <- hal_data %>%
 
 # IV. Comparaison de trois variables quantitatives (moyenne desflurane vs moyenne sevoflurane vs moyenne non halogéné) en fonction d'une modalité (unité)
 
-
-
 ### Gestion de la dataframe
 
 ```{r DF managementSank, include=FALSE}
@@ -142,5 +139,4 @@ moyenne_gaz_par_unit <- hal_data %>%
   dplyr::summarise(Desflurane = mean(desflurane , na.rm = TRUE),
                    Sevoflurane = mean(sevoflurane , na.rm = TRUE),
                    Non_Halogene = mean(zero_hal , na.rm = TRUE))
-
 ```
