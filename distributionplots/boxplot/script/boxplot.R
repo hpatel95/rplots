@@ -1,4 +1,4 @@
-#The aim is here to observe the distribution of one variable : age for each of the other variable : unit 
+#The goal is to observe the distribution of one variable : age for each of the other variable : unit, using a statistical tool : boxplot.
 
 #Load librairies
 library (tidyverse)
