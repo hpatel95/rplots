@@ -1,4 +1,4 @@
-#The aim here is to observe the evolution of one variable : age in time : year (annee).
+#The goal is to observe the evolution of one variable : age, throughout a time variable, year (annee).
 
 #Load librairies
 library (tidyverse)
