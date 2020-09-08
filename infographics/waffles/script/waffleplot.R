@@ -7,7 +7,8 @@ library(waffle)
 library(extrafont)
 
 #Load font (+verification)
-extrafont::font_import (path="C:/Users/dev_info_med/Downloads", pattern = "awesome", prompt = FALSE)
+font_path = "font_path"
+extrafont::font_import (path=font_path, pattern = "awesome", prompt = FALSE)
 loadfonts(device = "win")
 
 #########
