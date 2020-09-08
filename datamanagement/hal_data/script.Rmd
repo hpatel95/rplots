@@ -5,7 +5,8 @@ library (tidyverse)
 library (ggplot2)
 library(plotly)
 
-hal_data <- read.csv2("C:/Users/dev_info_med/Desktop/stages_janvier_fevrier_2020/hal_data.csv")
+path_import = "hal_data_path" #entrer ici le chemin d'acces de la base de donne d'interet
+hal_data <- read.csv2(path_import)
 ```
 # II. Variable quantitative (delta moyenne desfluranee 2018-2010 ici)  en fonction d'une modalité (unités ici)
 
